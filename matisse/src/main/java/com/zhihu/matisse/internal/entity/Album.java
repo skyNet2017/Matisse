@@ -22,9 +22,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.zhihu.matisse.R;
 import com.zhihu.matisse.internal.loader.AlbumLoader;
+
+import java.io.File;
 
 public class Album implements Parcelable {
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -117,4 +120,26 @@ public class Album implements Parcelable {
         return mCount == 0;
     }
 
+    @Override
+    public String toString() {
+        return "Album{" +
+                "mId='" + mId + '\'' +
+                ",\n mCoverPath='" + mCoverPath + '\'' +
+                ",\n mDisplayName='" + mDisplayName + '\'' +
+                ", mCount=" + mCount +
+                '}';
+    }
+
+    public File getAlbumDir(){
+        if(isAll() || isEmpty() || TextUtils.isEmpty(mCoverPath)){
+            return null;
+        }
+
+        File file = new File(mCoverPath);
+        if(!file.exists()){
+            return null;
+        }
+        return file.getParentFile();
+
+    }
 }

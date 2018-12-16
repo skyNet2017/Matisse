@@ -31,6 +31,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -378,6 +379,7 @@ public class MatisseActivity extends AppCompatActivity implements
     }
 
     private void onAlbumSelected(Album album) {
+        Log.e("dd","Album selected:"+album.toString());
         if (album.isAll() && album.isEmpty()) {
             mContainer.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
@@ -389,6 +391,7 @@ public class MatisseActivity extends AppCompatActivity implements
                     .beginTransaction()
                     .replace(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
                     .commitAllowingStateLoss();
+
         }
     }
 
